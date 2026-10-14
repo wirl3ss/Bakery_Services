@@ -15,7 +15,7 @@ class Role(enum.Enum):
 class User(Base):
     __tablename__ = "users_table"
 
-    id: Mapped[UUID] = mapped_column(
+    id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
@@ -48,4 +48,6 @@ class User(Base):
         default=lambda: datetime.now(timezone.utc)
     )
 
-    student: Mapped["Student"] = relationship("Student", back_populates="user", cascade="all, delete-orphan") # type: ignore
+    student: Mapped["Student"] = relationship(back_populates="user", cascade="all, delete-orphan") # type: ignore
+
+    shop: Mapped["Shop"] = relationship(back_populates="user", cascade="all, delete-orphan") # type: ignore

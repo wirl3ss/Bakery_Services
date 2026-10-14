@@ -10,7 +10,7 @@ from app.core.database import Base
 class School(Base):
     __tablename__ = "schools_table"
 
-    id: Mapped[UUID] = mapped_column(
+    id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4
@@ -34,4 +34,4 @@ class School(Base):
         default=lambda: datetime.now(timezone.utc)
     )
 
-    students: Mapped[List["Student"]] = relationship("Student", back_populates="school", cascade="all, delete-orphan") # type: ignore
+    students: Mapped[List["Student"]] = relationship(back_populates="school", cascade="all, delete-orphan") # type: ignore
