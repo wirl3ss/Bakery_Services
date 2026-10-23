@@ -58,5 +58,5 @@ class Order(Base):
     product: Mapped["Product"] = relationship(back_populates="orders") # type: ignore
 
     __table_args__ = (
-        CheckConstraint("amount > 0", name="ck_amount")
+        CheckConstraint("amount > 0", name="ck_amount"),
     )

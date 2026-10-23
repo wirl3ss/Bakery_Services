@@ -11,6 +11,7 @@ class Role(enum.Enum):
     STUDENT = "student"
     SHOP = "shop"
     ADMIN = "admin"
+    NOT_SPECIFIED = "not_specified"
 
 class User(Base):
     __tablename__ = "users_table"
@@ -35,11 +36,13 @@ class User(Base):
     email: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
+        unique=True,
     )
 
     role: Mapped[Role] = mapped_column(
         Enum(Role, name="role"),
         nullable=False,
+        default=Role.NOT_SPECIFIED  
     )
 
     created_at: Mapped[datetime] = mapped_column(

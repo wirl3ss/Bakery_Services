@@ -44,5 +44,5 @@ class Product(Base):
     orders: Mapped[List["Order"]] = relationship(back_populates="product", cascade="all, delete-orphan") # type: ignore
 
     __table_args__ = (
-        CheckConstraint("price >= 0", name="ck_prices")
+        CheckConstraint("price >= 0", name="ck_prices"),
     )

@@ -34,5 +34,5 @@ class WeeklySchedule(Base):
     shop: Mapped["Shop"] = relationship(back_populates="weekly_schedules") # type: ignore
 
     __table_args__ = (
-        CheckConstraint("day_of_week >= 0 AND day_of_week <= 6")
+        CheckConstraint("day_of_week >= 0 AND day_of_week <= 6"),
     )

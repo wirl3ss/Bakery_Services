@@ -22,7 +22,7 @@ class School(Base):
         unique=True,
     )
 
-    adress: Mapped[str] = mapped_column(
+    address: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
         unique=True,
