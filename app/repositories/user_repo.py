@@ -4,7 +4,7 @@ from sqlalchemy import select, update
 from collections.abc import Sequence
 from sqlalchemy.exc import IntegrityError
 
-from app.services.exceptions import (
+from app.core.exceptions import (
     UsernameAlreadyExistsError,
     EmailAlreadyExistsError,
     UserAlreadyExistsError,
@@ -32,12 +32,12 @@ async def get_by_role(db: AsyncSession, role: Role) -> Sequence[User]:
 async def get_by_username(db: AsyncSession, username: str) -> User | None:
     stmt = select(User).where(User.username == username)
     result = await db.execute(stmt)
-    return result.scalars().first()
+    return result.scalar_one_or_none()
 
 async def get_by_email(db: AsyncSession, email: str) -> User | None:
     stmt = select(User).where(User.email == email)
     result = await db.execute(stmt)
-    return result.scalars().first()
+    return result.scalar_one_or_none()
 
 # Create User
 
@@ -95,7 +95,7 @@ async def update_role(
         db: AsyncSession,
         id: uuid.UUID,
         role: Role,
-) -> User | None:
+) -> User:
     user = await get_by_id(db, id)
 
     if user is None:
@@ -116,6 +116,8 @@ async def update_role(
         raise UnableToUpdateUserError() from exc
 
     return user
+
+# Delete User
 
 async def delete_user(db: AsyncSession, id: uuid.UUID) -> None:
     user = await get_by_id(db, id)
