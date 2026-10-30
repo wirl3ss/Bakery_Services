@@ -58,3 +58,37 @@ class UnableToUpdateProductError(DomainError):
     status_code = 400
 class UnableToDeleteProductError(DomainError):
     status_code = 400
+
+# Order
+class UnableToCreateOrderError(DomainError):
+    status_code = 400
+class OrderNotFoundError(DomainError):
+    status_code = 404
+class UnableToUpdateOrderError(DomainError):
+    status_code = 400
+class UnableToDeleteOrderError(DomainError):
+    status_code = 400
+
+# WeeklySchedule
+class WeeklyScheduleAlreadyExistsError(DomainError):
+    status_code = 409
+class UnableToCreateWeeklyScheduleError(DomainError):
+    status_code = 400
+class WeeklyScheduleNotFoundError(DomainError):
+    status_code = 404
+class UnableToUpdateWeeklyScheduleError(DomainError):
+    status_code = 400
+class UnableToDeleteWeeklyScheduleError(DomainError):
+    status_code = 400
+
+# CalendarException
+class CalendarExceptionAlreadyExistsError(DomainError):
+    status_code = 409
+class UnableToCreateCalendarExceptionError(DomainError):
+    status_code = 400
+class CalendarExceptionNotFoundError(DomainError):
+    status_code = 404
+class UnableToUpdateCalendarExceptionError(DomainError):
+    status_code = 400
+class UnableToDeleteCalendarExceptionError(DomainError):
+    status_code = 400

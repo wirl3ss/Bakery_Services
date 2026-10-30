@@ -1,6 +1,6 @@
 import uuid
 from datetime import date
-from sqlalchemy import ForeignKey, Date
+from sqlalchemy import ForeignKey, Date, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -27,3 +27,11 @@ class CalendarException(Base):
     )
 
     shop: Mapped["Shop"] = relationship(back_populates="calendar_exceptions") # type: ignore
+
+    __table_args__ = (
+        UniqueConstraint(
+            "shop_id",
+            "date",
+            name="uq_calendar_exception_shop_date",
+        ),
+    )

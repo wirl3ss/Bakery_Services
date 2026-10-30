@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import ForeignKey, Integer, Boolean, CheckConstraint
+from sqlalchemy import ForeignKey, Integer, Boolean, CheckConstraint, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -35,4 +35,9 @@ class WeeklySchedule(Base):
 
     __table_args__ = (
         CheckConstraint("day_of_week >= 0 AND day_of_week <= 6"),
+        UniqueConstraint(
+            "shop_id",
+            "day_of_week",
+            name="uq_weekly_schedule_shop_day",
+        ),
     )

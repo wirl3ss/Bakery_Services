@@ -11,10 +11,6 @@ async def lifespan(app: FastAPI):
 
     yield
 
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all) # To remove. JUST FOR TESTING
-    await engine.dispose()
-
 
 app = FastAPI(lifespan=lifespan)
 
