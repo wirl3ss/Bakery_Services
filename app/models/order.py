@@ -6,15 +6,6 @@ from sqlalchemy.dialects.postgresql import UUID
 
 from app.core.database import Base
 
-class Day(enum.Enum):
-    MONDAY = 0
-    TUESDAY = 1
-    WEDNESDAY = 2
-    THURSDAY = 3
-    FRIDAY = 4
-    SATURDAY = 5
-    SUNDAY = 6
-
 class Order(Base):
     __tablename__ = "orders_table"
 

@@ -12,6 +12,7 @@ from app.core.exceptions import (
     UnableToUpdateSchoolError,
 )
 from app.models.school import School
+from app.types.types import SchoolUpdateData
 
 # Get School
 
@@ -58,7 +59,7 @@ async def create_school(db: AsyncSession, school: School) -> School:
 async def update_school(
     db: AsyncSession,
     id: uuid.UUID,
-    data: dict,
+    data: SchoolUpdateData,
 ) -> School:
     school = await get_by_id(db, id)
     if school is None:

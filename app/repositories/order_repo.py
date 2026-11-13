@@ -11,6 +11,7 @@ from app.core.exceptions import (
     UnableToDeleteOrderError,
 )
 from app.models.order import Order
+from app.types.types import OrderUpdateData
 
 # Get Order
 
@@ -74,7 +75,7 @@ async def create_order(
 async def update_order(
         db: AsyncSession,
         id: uuid.UUID,
-        data: dict,
+        data: OrderUpdateData,
 ) -> Order:
     order = await get_by_id(db, id)
     if order is None:

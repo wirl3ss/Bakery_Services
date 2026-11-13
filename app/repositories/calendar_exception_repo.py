@@ -72,32 +72,6 @@ async def create_calendar_exception(
 
 # Update CalendarException
 
-async def update_calendar_exception(
-    db: AsyncSession,
-    id: uuid.UUID,
-    data: dict,
-) -> CalendarException:
-
-    calendar_exception = await get_by_id(db, id)
-    if calendar_exception is None:
-        raise CalendarExceptionNotFoundError()
-
-    try:
-        stmt = (
-            update(CalendarException)
-            .where(CalendarException.id == id)
-            .values(**data)
-        )
-        await db.execute(stmt)
-        await db.commit()
-        await db.refresh(calendar_exception)
-
-    except Exception as exc:
-        await db.rollback()
-        raise UnableToUpdateCalendarExceptionError from exc
-
-    return calendar_exception
-
 # Delete CalendarException
 
 async def delete_calendar_exception(db: AsyncSession, id: uuid.UUID) -> None:

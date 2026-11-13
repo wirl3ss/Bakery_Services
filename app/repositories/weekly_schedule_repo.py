@@ -76,7 +76,7 @@ async def create_weekly_schedule(
 async def update_weekly_schedule(
     db: AsyncSession,
     id: uuid.UUID,
-    data: dict,
+    is_open: bool,
 ) -> WeeklySchedule:
 
     weekly_schedule = await get_by_id(db, id)
@@ -87,7 +87,7 @@ async def update_weekly_schedule(
         stmt = (
             update(WeeklySchedule)
             .where(WeeklySchedule.id == id)
-            .values(**data)
+            .values(is_open=is_open)
         )
 
         await db.execute(stmt)

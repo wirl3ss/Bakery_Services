@@ -11,6 +11,7 @@ from app.core.exceptions import (
     UnableToDeleteProductError,
 )
 from app.models.product import Product
+from app.types.types import ProductUpdateData
 
 # Get Product
 
@@ -58,7 +59,7 @@ async def create_product(
 async def update_product(
     db: AsyncSession,
     id: uuid.UUID,
-    data: dict,
+    data: ProductUpdateData,
 ) -> Product:
     product = await get_by_id(db, id)
     if product is None:

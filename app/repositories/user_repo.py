@@ -13,7 +13,7 @@ from app.core.exceptions import (
     UnableToDeleteUserError,
     )
 from app.models.user import User, Role
-
+from app.types.types import UserUpdateData
 # Get User
 
 async def get_all_users(db: AsyncSession) -> Sequence[User]:
@@ -64,7 +64,7 @@ async def create_user(db: AsyncSession, user: User) -> User:
 async def update_user(
     db: AsyncSession,
     id: uuid.UUID,
-    data: dict,
+    data: UserUpdateData,
 ) -> User | None:
     user = await get_by_id(db, id)
 

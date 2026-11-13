@@ -51,6 +51,14 @@ class User(Base):
         default=lambda: datetime.now(timezone.utc)
     )
 
-    student: Mapped["Student"] = relationship(back_populates="user", cascade="all, delete-orphan") # type: ignore
+    student: Mapped["Student"] = relationship( # type: ignore
+        back_populates="user",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
 
-    shop: Mapped["Shop"] = relationship(back_populates="user", cascade="all, delete-orphan") # type: ignore
+    shop: Mapped["Shop"] = relationship( # type: ignore
+        back_populates="user",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
